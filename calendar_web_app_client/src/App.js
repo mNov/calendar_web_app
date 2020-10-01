@@ -2,6 +2,7 @@ import React from "react";
 import logo from "./logo.svg";
 import { Counter } from "./features/counter/Counter";
 import "./App.css";
+import Event from './components/events'
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
             React Redux
           </a>
         </span>
+        <Event></Event>
       </header>
     </div>
   );
