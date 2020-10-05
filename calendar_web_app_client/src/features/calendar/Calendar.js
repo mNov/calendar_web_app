@@ -25,15 +25,15 @@ export const Calendar = ({ props }) => {
         console.log("authentication status is ", ApiCalendar.sign);
         console.log("listing events");
         ApiCalendar.listUpcomingEvents(10).then((result) => {
-          setEvents(result.items)}
-        );
+          setEvents(result.result.items)}
+        ).catch((error) => {console.log(error);});
 
         break;
       case "create event from now":
         console.log("authentication status is ", ApiCalendar.sign);
         console.log("creating an event");
         ApiCalendar.createEventFromNow({time: 120, summary:"test event"}).then((result) => {
-          setNewEvent(JSON.stringify(result.result))}
+          setNewEvent(result.result)}
         ).catch((error) => {console.log(error);});
         break;
       default:
@@ -53,12 +53,12 @@ export const Calendar = ({ props }) => {
       </button>
       <p>Here are the upcoming events</p>
       <ul>
-        {events.map((e) => (
-          <li>e</li>
+        {events.map((e, i) => (
+          <li key={i}>{JSON.stringify(e)}</li>
         ))}
       </ul>
       <p>Here is the event that was created</p>
-      <p>{newEvent}</p>
+      <p>{JSON.stringify(newEvent)}</p>
     </>
   );
 };
