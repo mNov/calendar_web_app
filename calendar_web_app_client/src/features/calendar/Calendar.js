@@ -24,17 +24,17 @@ export const Calendar = ({ props }) => {
       case "list upcoming events":
         console.log("authentication status is ", ApiCalendar.sign);
         console.log("listing events");
-        ApiCalendar.listUpcomingEvents(10).then((result) =>
-          setEvents(result.items)
+        ApiCalendar.listUpcomingEvents(10).then((result) => {
+          setEvents(result.items)}
         );
 
         break;
       case "create event from now":
         console.log("authentication status is ", ApiCalendar.sign);
         console.log("creating an event");
-        ApiCalendar.createEventFromNow(120, "test event").then((result) =>
-          setNewEvent(result)
-        );
+        ApiCalendar.createEventFromNow({time: 120, summary:"test event"}).then((result) => {
+          setNewEvent(JSON.stringify(result.result))}
+        ).catch((error) => {console.log(error);});
         break;
       default:
         console.log("invalid option");
