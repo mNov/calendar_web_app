@@ -7,6 +7,19 @@ import {
 } from "./surveySlice";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import ApiCalendar from "react-google-calendar-api";
+
+const makeAppointment = () => {
+  if (!ApiCalendar.sign) {
+    ApiCalendar.handleAuthClick();
+  }
+  console.log("authentication status is ", ApiCalendar.sign);
+  console.log("Making an apointment reminder");
+  ApiCalendar.createEventFromNow({time: 120, summary:"Make a doctor appointment"}).then((result) => {
+    console.log(result.result.summary);
+    return (result.result.summary)}
+  ).catch((error) => {console.log(error);});
+}
 
 function Question(props) {
   const dispatch = useDispatch();
@@ -96,8 +109,8 @@ export function Survey() {
       {currentQuestion == "end" ? (
         <div>
           You've reached the end of the survey! Here are your recommendations,
-          which you can add to your Google calendar here. (Insert link to Google
-          calendar)
+          which you can add to your Google calendar here.
+          <div>{makeAppointment()}</div>
         </div>
       ) : null}
     </>
