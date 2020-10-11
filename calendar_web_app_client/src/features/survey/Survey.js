@@ -7,19 +7,20 @@ import {
 } from "./surveySlice";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import ApiCalendar from "react-google-calendar-api";
+// import ApiCalendar from "react-google-calendar-api";
+import { Calendar } from "../calendar/Calendar";
 
-const makeAppointment = () => {
-  if (!ApiCalendar.sign) {
-    ApiCalendar.handleAuthClick();
-  }
-  console.log("authentication status is ", ApiCalendar.sign);
-  console.log("Making an apointment reminder");
-  ApiCalendar.createEventFromNow({time: 120, summary:"Make a doctor appointment"}).then((result) => {
-    console.log(result.result.summary);
-    return (result.result.summary)}
-  ).catch((error) => {console.log(error);});
-}
+// const makeAppointment = () => {
+//   if (!ApiCalendar.sign) {
+//     ApiCalendar.handleAuthClick();
+//   }
+//   console.log("authentication status is ", ApiCalendar.sign);
+//   console.log("Making an apointment reminder");
+//   ApiCalendar.createEventFromNow({time: 120, summary:"Make a doctor appointment"}).then((result) => {
+//     console.log(result.result.summary);
+//     return (result.result.summary)}
+//   ).catch((error) => {console.log(error);});
+// }
 
 function Question(props) {
   const dispatch = useDispatch();
@@ -108,9 +109,17 @@ export function Survey() {
       />
       {currentQuestion == "end" ? (
         <div>
-          You've reached the end of the survey! Here are your recommendations,
-          which you can add to your Google calendar here.
-          <div>{makeAppointment()}</div>
+          <p>
+            You've reached the end of the survey! Here are your recommendations:
+            !!!INSERT RECOMMENDATIONS HERE!!!
+          </p>
+          <p>
+            You can add reminders for these appointments to your Google calendar
+            by clicking the button below.
+          </p>
+          <br />
+          {/* TODO: pass relevant props to Calendar */}
+          <Calendar />
         </div>
       ) : null}
     </>

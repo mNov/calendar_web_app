@@ -24,17 +24,28 @@ export const Calendar = ({ props }) => {
       case "list upcoming events":
         console.log("authentication status is ", ApiCalendar.sign);
         console.log("listing events");
-        ApiCalendar.listUpcomingEvents(10).then((result) => {
-          setEvents(result.result.items)}
-        ).catch((error) => {console.log(error);});
+        ApiCalendar.listUpcomingEvents(10)
+          .then((result) => {
+            setEvents(result.result.items);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
 
         break;
       case "create event from now":
+        if (!ApiCalendar.sign) {
+          ApiCalendar.handleAuthClick();
+        }
         console.log("authentication status is ", ApiCalendar.sign);
         console.log("creating an event");
-        ApiCalendar.createEventFromNow({time: 120, summary:"test event"}).then((result) => {
-          setNewEvent(result.result)}
-        ).catch((error) => {console.log(error);});
+        ApiCalendar.createEventFromNow({ time: 120, summary: "test event" })
+          .then((result) => {
+            setNewEvent(result.result);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
         break;
       default:
         console.log("invalid option");
@@ -43,20 +54,20 @@ export const Calendar = ({ props }) => {
 
   return (
     <>
-      <button onClick={handleItemClick("sign in")}>Sign in</button>
-      <button onClick={handleItemClick("sign out")}>Sign out</button>
-      <button onClick={handleItemClick("list upcoming events")}>
+      {/* <button onClick={handleItemClick("sign in")}>Sign in</button> */}
+      {/* <button onClick={handleItemClick("sign out")}>Sign out</button> */}
+      {/* <button onClick={handleItemClick("list upcoming events")}>
         List Next 10 Upcoming Events
-      </button>
+      </button> */}
       <button onClick={handleItemClick("create event from now")}>
-        Create Event From Now
+        Add event to Google Calendar
       </button>
-      <p>Here are the upcoming events</p>
+      {/* <p>Here are the upcoming events</p>
       <ul>
         {events.map((e, i) => (
           <li key={i}>{JSON.stringify(e)}</li>
         ))}
-      </ul>
+      </ul> */}
       <p>Here is the event that was created</p>
       <p>{JSON.stringify(newEvent)}</p>
     </>
