@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// see features/counter/counterSlice.js for more examples
-
 export const calendarSlice = createSlice({
   name: "calendar",
   initialState: {},

@@ -1,5 +1,4 @@
 import React from "react";
-import { Calendar } from "./features/calendar/Calendar";
 import { Survey } from "./features/survey/Survey";
 import "./App.css";
 
@@ -13,8 +12,6 @@ function App() {
       </p>
       <br />
       <Survey />
-      <br />
-      {/* <Calendar /> */}
     </div>
   );
 }
