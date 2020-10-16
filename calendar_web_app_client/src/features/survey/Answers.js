@@ -24,55 +24,46 @@ export const Answers = () => {
         </ListGroup>
       </Card>
       <Card>
-      <h3> Recommendations for mammograms</h3>
-      {answers.familyHistory==="false"&&answers.geneticMutation=="false"&&answers.personalHistory==="false"&&answers.radiationBefore30==="false"?(
-        <p>
-
-        According to the answers you submitted, you might be at average risk for breast cancer.
-
-
-        {answers.age === "0-39" ? (
+        <h3> Recommendations for mammograms</h3>
+        {answers.familyHistory === "false" &&
+        answers.geneticMutation == "false" &&
+        answers.personalHistory === "false" &&
+        answers.radiationBefore30 === "false" ? (
           <p>
-            The Cancer.org, annual mammograms have shown no benefit to
-            women under the age of 40 with no personal history of breast cancer.
+            According to the answers you submitted, you might be at average risk
+            for breast cancer.
+            {answers.age === "0-39" ? (
+              <p>
+                According to Cancer.org, annual mammograms have shown no benefit
+                to women under the age of 40 with no personal history of breast
+                cancer.
+              </p>
+            ) : answers.age === "40-44" ? (
+              <p>
+                The American Cancer Society recommends women of age 40-44 at
+                average risk to have the option to do annual mammograms.
+              </p>
+            ) : answers.age === "45-54" ? (
+              <p>
+                The American Cancer Society recommends women of age 45-54 at
+                average risk to receive annual mammograms.
+              </p>
+            ) : answers.age === "55+" ? (
+              <p>
+                The American Cancer Society recommends women of age 55+ at
+                average risk to consider receiving mammograms every other year,
+                or continue receiving mammograms every year.
+              </p>
+            ) : null}
           </p>
-        ) : answers.age === "40-44" ? (
+        ) : (
           <p>
-
-            The American Cancer Society recommends women of age 40-44 at average risk to
-            have the option to do annual mammograms.
-            </p>
-
-        ) : answers.age === "45-54" ? (
-          <p>
-
-
-            The American Cancer Society recommends women of age 45-54 at average risk to
-            receive annual mammograms.
-            </p>
-
-        ) : answers.age === "55+" ? (
-          <p>
-
-
-            The American Cancer Society recommends women of age 55+ at average risk to
-            consider receiving mammograms every other year, or continue receiving
-            mammograms every year.
-            </p>
-
-
-        ) : null
-      }
-      </p>
-
-      ):
-      <p>
-        According to the answers you submitted, you might be at high risk for breast cancer, please consult a health professional for more information.
-        </p>
-
-    }
-    </Card>
-
+            According to the answers you submitted, you might be at high risk
+            for breast cancer. Please consult a health professional for more
+            information.
+          </p>
+        )}
+      </Card>
       <Card>
         Risk factors for breast cancer include being biologically female, having
         a family history, genetic mutation, and/or personal history of breast
@@ -148,63 +139,6 @@ export const Answers = () => {
           </ListGroup.Item>
         </ListGroup>
       </Card>
-      <Card>
-        <Card.Header>Here are some breast cancer communities:</Card.Header>
-        <ListGroup variant="flush">
-          <ListGroup.Item
-            action
-            href="https://community.breastcancer.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            https://community.breastcancer.org/
-          </ListGroup.Item>
-          <ListGroup.Item
-            action
-            href="https://www.youngsurvival.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            https://www.youngsurvival.org/ (for patients diagnosed 40 and
-            younger)
-          </ListGroup.Item>
-          <ListGroup.Item
-            action
-            href="https://www.lbbc.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            https://www.lbbc.org/ (Living Beyond Breast Cancer - for anyone
-            dealing with breast cancer)
-          </ListGroup.Item>
-          <ListGroup.Item
-            action
-            href="https://www.metavivor.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            https://www.metavivor.org/ (for metastatic breast cancer patients)
-          </ListGroup.Item>
-          <ListGroup.Item
-            action
-            href="https://www.cancercare.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            https://www.cancercare.org/ (counseling, support groups, other
-            resources for people with any type of cancer)
-          </ListGroup.Item>
-          <ListGroup.Item
-            action
-            href="https://imermanangels.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            https://imermanangels.org/ (free one-on-one cancer suppport)
-          </ListGroup.Item>
-        </ListGroup>
-      </Card>
-
       <Card>
         DISCLAIMER: This app was developed by non-medical professionals, and is
         intended for informational purposes only. Please speak to a medical

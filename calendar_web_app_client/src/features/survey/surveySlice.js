@@ -19,7 +19,7 @@ export const surveySlice = createSlice({
       state.answers[action.payload.question] = action.payload.answer;
     },
     updateCurrentQuestion: (state) => {
-      // tree logic goes here - TODO - this could be improved
+      // decision tree logic
       if (state.currentQuestion === "female") {
         state.currentQuestion = "familyHistory";
       } else if (state.currentQuestion === "familyHistory") {
@@ -27,7 +27,11 @@ export const surveySlice = createSlice({
       } else if (state.currentQuestion === "geneticMutation") {
         state.currentQuestion = "personalHistory";
       } else if (state.currentQuestion === "personalHistory") {
-        state.currentQuestion = "doubleMastectomy";
+        if (state.answers.personalHistory === "true") {
+          state.currentQuestion = "doubleMastectomy";
+        } else {
+          state.currentQuestion = "radiationBefore30";
+        }
       } else if (state.currentQuestion === "doubleMastectomy") {
         state.currentQuestion = "radiationBefore30";
       } else if (state.currentQuestion === "radiationBefore30") {
