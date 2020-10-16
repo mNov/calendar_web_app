@@ -20,6 +20,26 @@ export const Answers = () => {
             </ListGroup.Item>
           ))}
       </ListGroup>
+      {answers.age==="0-40"?(
+        <p>
+        According to Cancer.org, annual mammograms has shown no benefit to women under the age of 40.
+        </p>
+      ):answers.age==="40-44"?(
+        <p>
+        According to American Cancer Society, women of age 40-44 should have the option to do annual mammograms.
+        </p>
+
+      ):answers.age==="45-54"?(
+        <p>
+        According to American Cancer Society, women of age 45-54 should recieve annual mammograms.
+        </p>
+
+      ):answers.age==="54+"?(
+        <p>
+        According to American Cancer Society, women of age 55+ can consider recieving mammogram everyother year, or continue recieving mammograms every year.
+        </p>
+
+      ):null}
       <p>
         Risk factors for breast cancer include being biologically female, having
         a family history, genetic mutation, and/or personal history of breast

@@ -145,6 +145,7 @@ export const Survey = () => {
             You've reached the end of the survey! Here are your answers and
             recommendations:
           </p>
+          
           <Answers />
         </div>
       ) : null}
