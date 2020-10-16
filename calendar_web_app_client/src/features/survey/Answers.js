@@ -23,28 +23,56 @@ export const Answers = () => {
             ))}
         </ListGroup>
       </Card>
-      {answers.age === "0-39" ? (
-        <Card>
-          According to Cancer.org, annual mammograms have shown no benefit to
-          women under the age of 40 with no personal history of breast cancer.
-        </Card>
-      ) : answers.age === "40-44" ? (
+      <Card>
+      <h3> Recommendations for mammograms</h3>
+      {answers.familyHistory==="false"&&answers.geneticMutation=="false"&&answers.personalHistory==="false"&&answers.radiationBefore30==="false"?(
         <p>
-          According to the American Cancer Society, women of age 40-44 should
-          have the option to do annual mammograms.
+
+        According to the answers you submitted, you might be at average risk for breast cancer.
+
+
+        {answers.age === "0-39" ? (
+          <p>
+            The Cancer.org, annual mammograms have shown no benefit to
+            women under the age of 40 with no personal history of breast cancer.
+          </p>
+        ) : answers.age === "40-44" ? (
+          <p>
+
+            The American Cancer Society recommends women of age 40-44 at average risk to
+            have the option to do annual mammograms.
+            </p>
+
+        ) : answers.age === "45-54" ? (
+          <p>
+
+
+            The American Cancer Society recommends women of age 45-54 at average risk to
+            receive annual mammograms.
+            </p>
+
+        ) : answers.age === "55+" ? (
+          <p>
+
+
+            The American Cancer Society recommends women of age 55+ at average risk to
+            consider receiving mammograms every other year, or continue receiving
+            mammograms every year.
+            </p>
+
+
+        ) : null
+      }
+      </p>
+
+      ):
+      <p>
+        According to the answers you submitted, you might be at high risk for breast cancer, please consult a health professional for more information.
         </p>
-      ) : answers.age === "45-54" ? (
-        <p>
-          According to the American Cancer Society, women of age 45-54 should
-          receive annual mammograms.
-        </p>
-      ) : answers.age === "55+" ? (
-        <p>
-          According to the American Cancer Society, women of age 55+ can
-          consider receiving mammograms every other year, or continue receiving
-          mammograms every year.
-        </p>
-      ) : null}
+
+    }
+    </Card>
+
       <Card>
         Risk factors for breast cancer include being biologically female, having
         a family history, genetic mutation, and/or personal history of breast
