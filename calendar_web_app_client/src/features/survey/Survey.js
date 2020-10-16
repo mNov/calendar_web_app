@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import _ from "lodash";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {
@@ -14,58 +13,7 @@ const Question = (props) => {
   const dispatch = useDispatch();
   const [answer, setAnswer] = useState(null);
   const currentQuestion = useSelector(selectCurrentQuestion);
-  if (props.questionName=="age"){
-  return currentQuestion === props.questionName ? (
-    <>
-      <Form
-        onSubmit={(e) => {
-          e.preventDefault();
-          dispatch(updateAnswer({ question: props.questionName, answer }));
-          dispatch(updateCurrentQuestion());
-        }}
-      >
-        <Form.Group>
-          <Form.Label>{props.questionString}</Form.Label>
-          <Form.Check
-            inline
-            type="checkbox"
-            label={"0-40"}
-            value={"0-40"}
-            checked={answer === "0-40"}
-            onChange={(e) => setAnswer(e.target.value)}
-          />
-          <Form.Check
-            inline
-            type="checkbox"
-            label={"40-44"}
-            value={"40-44"}
-            checked={answer === "40-44"}
-            onChange={(e) => setAnswer(e.target.value)}
-          />
-          <Form.Check
-            inline
-            type="checkbox"
-            label={"45-54"}
-            value={"45-54"}
-            checked={answer === "45-54"}
-            onChange={(e) => setAnswer(e.target.value)}
-          />
-          <Form.Check
-            inline
-            type="checkbox"
-            label={"54+"}
-            value={"54+"}
-            checked={answer === "54+"}
-            onChange={(e) => setAnswer(e.target.value)}
-          />
-          <Form.Text className="text-muted">{props.questionDesc}</Form.Text>
-        </Form.Group>
-        <Button variant="primary" type="submit" disabled={answer === null}>
-          Next question
-        </Button>
-      </Form>
-    </>
-  ) : null;}else{
+  if (props.questionName === "age") {
     return currentQuestion === props.questionName ? (
       <>
         <Form
@@ -77,6 +25,60 @@ const Question = (props) => {
         >
           <Form.Group>
             <Form.Label>{props.questionString}</Form.Label>
+            <br />
+            <Form.Check
+              inline
+              type="checkbox"
+              label={"0-39"}
+              value={"0-39"}
+              checked={answer === "0-39"}
+              onChange={(e) => setAnswer(e.target.value)}
+            />
+            <Form.Check
+              inline
+              type="checkbox"
+              label={"40-44"}
+              value={"40-44"}
+              checked={answer === "40-44"}
+              onChange={(e) => setAnswer(e.target.value)}
+            />
+            <Form.Check
+              inline
+              type="checkbox"
+              label={"45-54"}
+              value={"45-54"}
+              checked={answer === "45-54"}
+              onChange={(e) => setAnswer(e.target.value)}
+            />
+            <Form.Check
+              inline
+              type="checkbox"
+              label={"55+"}
+              value={"55+"}
+              checked={answer === "55+"}
+              onChange={(e) => setAnswer(e.target.value)}
+            />
+            <Form.Text className="text-muted">{props.questionDesc}</Form.Text>
+          </Form.Group>
+          <Button variant="primary" type="submit" disabled={answer === null}>
+            Click here for your results!
+          </Button>
+        </Form>
+      </>
+    ) : null;
+  } else {
+    return currentQuestion === props.questionName ? (
+      <>
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+            dispatch(updateAnswer({ question: props.questionName, answer }));
+            dispatch(updateCurrentQuestion());
+          }}
+        >
+          <Form.Group>
+            <Form.Label>{props.questionString}</Form.Label>
+            <br />
             <Form.Check
               inline
               type="radio"
@@ -129,13 +131,18 @@ export const Survey = () => {
         questionName="personalHistory"
       />
       <Question
+        questionString="Have you had a double mastectomy?"
+        questionDesc="If you have had breast-conserving surgery (lumpectomy) or a single mastectomy, select 'no'."
+        questionName="doubleMastectomy"
+      />
+      <Question
         questionString="Have you had radiation to your chest before age 30?"
         questionDesc="If you have been treated with radiation therapy to your chest for another type of cancer, such as lymphoma, select 'yes'."
         questionName="radiationBefore30"
       />
 
       <Question
-        questionString="age?"
+        questionString="What's your age?"
         questionDesc="Select your age range."
         questionName="age"
       />
@@ -145,7 +152,7 @@ export const Survey = () => {
             You've reached the end of the survey! Here are your answers and
             recommendations:
           </p>
-          
+
           <Answers />
         </div>
       ) : null}

@@ -8,10 +8,9 @@ export const surveySlice = createSlice({
       familyHistory: null,
       geneticMutation: null,
       personalHistory: null,
+      doubleMastectomy: null,
       radiationBefore30: null,
-      // TODO - maybe don't ask yes/no q's for all 4 of these
-  
-      age:null
+      age: null,
     },
     currentQuestion: "female",
   },
@@ -28,6 +27,8 @@ export const surveySlice = createSlice({
       } else if (state.currentQuestion === "geneticMutation") {
         state.currentQuestion = "personalHistory";
       } else if (state.currentQuestion === "personalHistory") {
+        state.currentQuestion = "doubleMastectomy";
+      } else if (state.currentQuestion === "doubleMastectomy") {
         state.currentQuestion = "radiationBefore30";
       } else if (state.currentQuestion === "radiationBefore30") {
         state.currentQuestion = "age";
