@@ -10,10 +10,8 @@ export const surveySlice = createSlice({
       personalHistory: null,
       radiationBefore30: null,
       // TODO - maybe don't ask yes/no q's for all 4 of these
-      below40: null,
-      between40And44: null,
-      between45And54: null,
-      above55: null,
+  
+      age:null
     },
     currentQuestion: "female",
   },
@@ -32,26 +30,8 @@ export const surveySlice = createSlice({
       } else if (state.currentQuestion === "personalHistory") {
         state.currentQuestion = "radiationBefore30";
       } else if (state.currentQuestion === "radiationBefore30") {
-        state.currentQuestion = "below40";
-      } else if (state.currentQuestion === "below40") {
-        if (state.answers.below40 === "false") {
-          state.currentQuestion = "between40And44";
-        } else {
-          state.currentQuestion = "end";
-        }
-      } else if (state.currentQuestion === "between40And44") {
-        if (state.answers.between40And44 === "false") {
-          state.currentQuestion = "between45And54";
-        } else {
-          state.currentQuestion = "end";
-        }
-      } else if (state.currentQuestion === "between45And54") {
-        if (state.answers.between45And54 === "false") {
-          state.currentQuestion = "above55"; // TODO - is this necessary?
-        } else {
-          state.currentQuestion = "end";
-        }
-      } else {
+        state.currentQuestion = "age";
+      } else if (state.currentQuestion === "age") {
         state.currentQuestion = "end";
       }
     },

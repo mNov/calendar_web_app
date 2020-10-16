@@ -15,6 +15,7 @@ const Question = (props) => {
   const dispatch = useDispatch();
   const [answer, setAnswer] = useState(null);
   const currentQuestion = useSelector(selectCurrentQuestion);
+  if (props.questionName=="age"){
   return currentQuestion === props.questionName ? (
     <>
       <Form
@@ -28,18 +29,34 @@ const Question = (props) => {
           <Form.Label>{props.questionString}</Form.Label>
           <Form.Check
             inline
-            type="radio"
-            label={"Yes"}
-            value={true}
-            checked={answer === "true"}
+            type="checkbox"
+            label={"0-40"}
+            value={"0-40"}
+            checked={answer === "0-40"}
             onChange={(e) => setAnswer(e.target.value)}
           />
           <Form.Check
             inline
-            type="radio"
-            label={"No"}
-            value={false}
-            checked={answer === "false"}
+            type="checkbox"
+            label={"40-44"}
+            value={"40-44"}
+            checked={answer === "40-44"}
+            onChange={(e) => setAnswer(e.target.value)}
+          />
+          <Form.Check
+            inline
+            type="checkbox"
+            label={"45-54"}
+            value={"45-54"}
+            checked={answer === "45-54"}
+            onChange={(e) => setAnswer(e.target.value)}
+          />
+          <Form.Check
+            inline
+            type="checkbox"
+            label={"54+"}
+            value={"54+"}
+            checked={answer === "54+"}
             onChange={(e) => setAnswer(e.target.value)}
           />
           <Form.Text className="text-muted">{props.questionDesc}</Form.Text>
@@ -49,7 +66,43 @@ const Question = (props) => {
         </Button>
       </Form>
     </>
-  ) : null;
+  ) : null;}else{
+    return currentQuestion === props.questionName ? (
+      <>
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+            dispatch(updateAnswer({ question: props.questionName, answer }));
+            dispatch(updateCurrentQuestion());
+          }}
+        >
+          <Form.Group>
+            <Form.Label>{props.questionString}</Form.Label>
+            <Form.Check
+              inline
+              type="radio"
+              label={"Yes"}
+              value={true}
+              checked={answer === "true"}
+              onChange={(e) => setAnswer(e.target.value)}
+            />
+            <Form.Check
+              inline
+              type="radio"
+              label={"No"}
+              value={false}
+              checked={answer === "false"}
+              onChange={(e) => setAnswer(e.target.value)}
+            />
+            <Form.Text className="text-muted">{props.questionDesc}</Form.Text>
+          </Form.Group>
+          <Button variant="primary" type="submit" disabled={answer === null}>
+            Next question
+          </Button>
+        </Form>
+      </>
+    ) : null;
+  }
 };
 
 const Answers = () => {
@@ -127,25 +180,11 @@ export const Survey = () => {
         questionDesc="If you have been treated with radiation therapy to your chest for another type of cancer, such as lymphoma, select 'yes'."
         questionName="radiationBefore30"
       />
+
       <Question
-        questionString="Are you below the age of 40?"
-        questionDesc="Ages 0-39"
-        questionName="below40"
-      />
-      <Question
-        questionString="Are you between the ages of 40-44?"
-        questionDesc="Ages 40-44"
-        questionName="between40And44"
-      />
-      <Question
-        questionString="Are you between the ages of 45-54?"
-        questionDesc="Ages 45-54"
-        questionName="between45And54"
-      />
-      <Question
-        questionString="Are you 55 or older?"
-        questionDesc="Ages 55+"
-        questionName="above55"
+        questionString="age?"
+        questionDesc="Select your age range."
+        questionName="age"
       />
       {currentQuestion === "end" ? (
         <div>
