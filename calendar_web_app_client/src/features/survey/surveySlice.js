@@ -4,6 +4,7 @@ export const surveySlice = createSlice({
   name: "survey",
   initialState: {
     answers: {
+      start: false,
       female: null,
       familyHistory: null,
       geneticMutation: null,
@@ -12,7 +13,7 @@ export const surveySlice = createSlice({
       radiationBefore30: null,
       age: null,
     },
-    currentQuestion: "female",
+    currentQuestion: "start",
   },
   reducers: {
     updateAnswer: (state, action) => {
@@ -20,7 +21,9 @@ export const surveySlice = createSlice({
     },
     updateCurrentQuestion: (state) => {
       // decision tree logic
-      if (state.currentQuestion === "female") {
+      if (state.currentQuestion === "start") {
+        state.currentQuestion = "female";
+      } else if (state.currentQuestion === "female") {
         state.currentQuestion = "familyHistory";
       } else if (state.currentQuestion === "familyHistory") {
         state.currentQuestion = "geneticMutation";

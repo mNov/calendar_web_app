@@ -35,9 +35,6 @@ export const CalendarEvent = ({ eventName, frequency }) => {
       });
   };
 
-  console.log("calendar event is ");
-  console.dir(newEvent);
-
   return (
     <>
       <button onClick={handleItemClick}>{eventName}</button>
@@ -45,7 +42,9 @@ export const CalendarEvent = ({ eventName, frequency }) => {
         <Card>
           <Card.Header>Event created on Google Calendar!</Card.Header>
           <ListGroup>
-            <ListGroup.Item>Calendar ID: {newEvent.calendarId}</ListGroup.Item>
+            <ListGroup.Item>
+              Calendar ID: {newEvent.calendarId || "primary"}
+            </ListGroup.Item>
             <ListGroup.Item>Summary: {newEvent.summary}</ListGroup.Item>
             <ListGroup.Item>
               Frequency: {newEvent.recurrence || "One time"}{" "}

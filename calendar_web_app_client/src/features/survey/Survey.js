@@ -13,8 +13,26 @@ const Question = (props) => {
   const dispatch = useDispatch();
   const [answer, setAnswer] = useState(null);
   const currentQuestion = useSelector(selectCurrentQuestion);
-  if (props.questionName === "age") {
-    return currentQuestion === props.questionName ? (
+  if (props.questionName === "start" && currentQuestion === "start") {
+    return (
+      <>
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+            dispatch(updateCurrentQuestion());
+          }}
+        >
+          <Form.Group>
+            <Form.Label>{props.questionString}</Form.Label>
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Start!
+          </Button>
+        </Form>
+      </>
+    );
+  } else if (props.questionName === "age" && currentQuestion === "age") {
+    return (
       <>
         <Form
           onSubmit={(e) => {
@@ -65,7 +83,7 @@ const Question = (props) => {
           </Button>
         </Form>
       </>
-    ) : null;
+    );
   } else {
     return currentQuestion === props.questionName ? (
       <>
@@ -110,6 +128,11 @@ export const Survey = () => {
   const currentQuestion = useSelector(selectCurrentQuestion);
   return (
     <>
+      <Question
+        questionString="Click 'Start' to start the survey!"
+        questionDesc=""
+        questionName="start"
+      />
       <Question
         questionString="Are you biologically female?"
         questionDesc="If you were born female, select 'yes'."

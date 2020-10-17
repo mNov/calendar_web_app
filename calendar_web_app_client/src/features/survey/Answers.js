@@ -15,7 +15,9 @@ export const Answers = () => {
         <ListGroup variant="flush">
           {Object.entries(answers)
             // ignore any of the questions that were not asked:
-            .filter(([question, answer]) => answer !== null)
+            .filter(
+              ([question, answer]) => question !== "start" && answer !== null
+            )
             .map(([question, answer]) => (
               <ListGroup.Item key={question}>
                 {_.startCase(question)}: {answer}
