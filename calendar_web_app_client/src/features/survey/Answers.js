@@ -26,7 +26,7 @@ export const Answers = () => {
       <Card>
         <h3> Recommendations for mammograms</h3>
         {answers.familyHistory === "false" &&
-        answers.geneticMutation == "false" &&
+        answers.geneticMutation === "false" &&
         answers.personalHistory === "false" &&
         answers.radiationBefore30 === "false" ? (
           <p>
@@ -83,15 +83,23 @@ export const Answers = () => {
         not have any of these risk factors. Click below to schedule reminders on
         Google Calendar.
       </Card>
-      <br />
-      <CalendarEvent eventName="Breast self-exam" frequency="MONTHLY" />
-      <CalendarEvent eventName="Reminder to schedule appt with doctor" />
-      {answers.female === true &&
-        (["40-44", "45-54", "55+"].includes(answers.age) ||
-          (answers.personalHistory === "true" &&
-            answers.doubleMastectomy === "false")) && (
-          <CalendarEvent eventName="Reminder to schedule a mammogram" />
-        )}
+      <Card>
+        <Card.Header>
+          NOTE: these buttons will schedule a breast self-exam reminder that
+          repeats monthly, and a one-time doctor's appointment reminder,
+          respectively. Both will start two hours from the time you click them.
+        </Card.Header>
+        <Card.Body>
+          <CalendarEvent eventName="Breast self-exam" frequency="MONTHLY" />
+          <CalendarEvent eventName="Reminder to schedule appt with doctor" />
+          {answers.female === true &&
+            (["40-44", "45-54", "55+"].includes(answers.age) ||
+              (answers.personalHistory === "true" &&
+                answers.doubleMastectomy === "false")) && (
+              <CalendarEvent eventName="Reminder to schedule a mammogram" />
+            )}
+        </Card.Body>
+      </Card>
       <Card>
         <Card.Header>
           Here are some general resources about breast cancer:
